@@ -1,151 +1,138 @@
 {
-    "name": "DF703 TCP Connector",
-    "type": "TCP",
-    "address": "127.0.0.1",  
-    "port": 8053,            
-    "bufferSize": 1024,
-    "devices": [
-      {
-        "address": "DF703_sensor_address:DF703_sensor_port",  
-        "deviceName": "DF703_Sensor",
-        "deviceType": "default",
-        "encoding": "HEX",  
-       "telemetry": [
+  "name": "DF703 TCP Connector",
+  "type": "TCP",
+  "address": "127.0.0.1",
+  "port": 8053,
+  "bufferSize": 1024,
+  "devices": [
     {
-      "key": "height",
-      "type": "long",
-      "function": "hexToInt",
-      "byteOrder": "BIG_ENDIAN",
-      "startByte": 0,
-      "byteSize": 2
-    },
-    {
-      "key": "gpsSelection",
-      "type": "boolean",
-      "function": "hexToBoolean",
-      "startByte": 2,
-      "byteSize": 1
-    },
-    {
-      "key": "longitude",
-      "type": "double",
-      "function": "hexToDouble",
-      "byteOrder": "BIG_ENDIAN",
-      "startByte": 3,
-      "byteSize": 4
-    },
-    {
-      "key": "latitude",
-      "type": "double",
-      "function": "hexToDouble",
-      "byteOrder": "BIG_ENDIAN",
-      "startByte": 7,
-      "byteSize": 4
-    },
-    {
-      "key": "temperature",
-      "type": "double",
-      "function": "hexToDouble",
-      "byteOrder": "BIG_ENDIAN",
-      "startByte": 11,
-      "byteSize": 1
-    },
-    {
-      "key": "fallAngle",
-      "type": "double",
-      "function": "hexToDouble",
-      "byteOrder": "BIG_ENDIAN",
-      "startByte": 12,
-      "byteSize": 1
-    },
-    {
-      "key": "fullStatus",
-      "type": "long",
-      "function": "hexToInt",
-      "byteOrder": "BIG_ENDIAN",
-      "startByte": 13,
-      "byteSize": 0.5  
-    },
-    {
-      "key": "fireStatus",
-      "type": "long",
-      "function": "hexToInt",
-      "byteOrder": "BIG_ENDIAN",
-      "startByte": 13.5,  
-      "byteSize": 0.5
-    },
-    {
-      "key": "fallStatus",
-      "type": "long",
-      "function": "hexToInt",
-      "byteOrder": "BIG_ENDIAN",
-      "startByte": 14,
-      "byteSize": 0.5  
-    },
-    {
-      "key": "powerStatus",
-      "type": "long",
-      "function": "hexToInt",
-      "byteOrder": "BIG_ENDIAN",
-      "startByte": 14.5,  
-      "byteSize": 0.5
-    },
-    {
-      "key": "batteryVoltage",
-      "type": "double",
-      "function": "hexToDouble",
-      "byteOrder": "BIG_ENDIAN",
-      "startByte": 15,
-      "byteSize": 2
-    },
-    {
-      "key": "RSRP",
-      "type": "double",
-      "function": "hexToDouble",
-      "byteOrder": "BIG_ENDIAN",
-      "startByte": 17,
-      "byteSize": 4
-    },
-    {
-      "key": "frameCount",
-      "type": "long",
-      "function": "hexToInt",
-      "byteOrder": "BIG_ENDIAN",
-      "startByte": 21,
-      "byteSize": 2
+      "address": "DF703_sensor_address:DF703_sensor_port",
+      "deviceName": "DF703_Sensor",
+      "deviceType": "default",
+      "encoding": "HEX",
+      "telemetry": [
+        {
+          "key": "height",
+          "type": "long",
+          "function": "hexToInt",
+          "byteOrder": "BIG_ENDIAN",
+          "startByte": 0,
+          "byteSize": 2
+        },
+        {
+          "key": "gpsSelection",
+          "type": "boolean",
+          "function": "hexToBoolean",
+          "startByte": 2,
+          "byteSize": 1
+        },
+        {
+          "key": "longitude",
+          "type": "double",
+          "function": "hexToDouble",
+          "byteOrder": "BIG_ENDIAN",
+          "startByte": 3,
+          "byteSize": 4
+        },
+        {
+          "key": "latitude",
+          "type": "double",
+          "function": "hexToDouble",
+          "byteOrder": "BIG_ENDIAN",
+          "startByte": 7,
+          "byteSize": 4
+        },
+        {
+          "key": "temperature",
+          "type": "double",
+          "function": "hexToDouble",
+          "byteOrder": "BIG_ENDIAN",
+          "startByte": 11,
+          "byteSize": 1
+        },
+        {
+          "key": "fallAngle",
+          "type": "double",
+          "function": "hexToDouble",
+          "byteOrder": "BIG_ENDIAN",
+          "startByte": 12,
+          "byteSize": 1
+        },
+        {
+          "key": "fullStatus",
+          "type": "long",
+          "function": "hexToInt",
+          "byteOrder": "BIG_ENDIAN",
+          "startByte": 13,
+          "byteSize": 0.5
+        },
+        {
+          "key": "fireStatus",
+          "type": "long",
+          "function": "hexToInt",
+          "byteOrder": "BIG_ENDIAN",
+          "startByte": 13.5,
+          "byteSize": 0.5
+        },
+        {
+          "key": "fallStatus",
+          "type": "long",
+          "function": "hexToInt",
+          "byteOrder": "BIG_ENDIAN",
+          "startByte": 14,
+          "byteSize": 0.5
+        },
+        {
+          "key": "powerStatus",
+          "type": "long",
+          "function": "hexToInt",
+          "byteOrder": "BIG_ENDIAN",
+          "startByte": 14.5,
+          "byteSize": 0.5
+        },
+        {
+          "key": "batteryVoltage",
+          "type": "double",
+          "function": "hexToDouble",
+          "byteOrder": "BIG_ENDIAN",
+          "startByte": 15,
+          "byteSize": 2
+        },
+        {
+          "key": "RSRP",
+          "type": "double",
+          "function": "hexToDouble",
+          "byteOrder": "BIG_ENDIAN",
+          "startByte": 17,
+          "byteSize": 4
+        },
+        {
+          "key": "frameCount",
+          "type": "long",
+          "function": "hexToInt",
+          "byteOrder": "BIG_ENDIAN",
+          "startByte": 21,
+          "byteSize": 2
+        }
+      ],
+      "attributes": [
+        {
+          "key": "deviceId",
+          "type": "string",
+          "function": "hexToString",
+          "startByte": 23,
+          "byteSize": 8
+        }
+      ],
+      "attributeRequests": [
+        {}
+      ],
+      "attributeUpdates": [
+        {}
+      ],
+      "serverSideRpc": [
+        {}
+      ]
     }
-   
-  ],
-  
-  
-  
-  
-        "attributes": [
-           {
-      "key": "deviceId",
-      "type": "string",
-      "function": "hexToString",
-      "startByte": 23,
-      "byteSize": 8
-    }
-        ],
-        "attributeRequests": [
-          {
-            
-          }
-        ],
-        "attributeUpdates": [
-          {
-            
-          }
-        ],
-        "serverSideRpc": [
-          {
-            
-          }
-        ]
-      }
-    ]
-  }
-  
-  
+  ]
+}
