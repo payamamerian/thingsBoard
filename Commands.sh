@@ -2,3 +2,7 @@ sudo docker run -it -v ~/.tb-gateway/logs:/thingsboard_gateway/logs -v ~/.tb-gat
 
 sudo docker logs ffcb8034c7cd
 
+sudo docker exec -it ffcb8034c7cd /bin/bash
+
+
+
