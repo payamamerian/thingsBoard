@@ -5,4 +5,11 @@ sudo docker logs ffcb8034c7cd
 sudo docker exec -it ffcb8034c7cd /bin/bash
 
 
+/thingsboard_gateway/config/tb_gateway.json
+/thingsboard_gateway/config/socket.json
+
+#py file
+thingsboard_gateway/extensions/socket
+
+docker cp tbGateway8322983184:/thingsboard_gateway/config/socket.json /etc
 
