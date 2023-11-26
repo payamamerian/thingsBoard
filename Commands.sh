@@ -4,6 +4,8 @@ sudo docker logs ffcb8034c7cd
 
 sudo docker exec -it ffcb8034c7cd /bin/bash
 
+docker restart ffcb8034c7cd
+
 
 /thingsboard_gateway/config/tb_gateway.json
 /thingsboard_gateway/config/socket.json
