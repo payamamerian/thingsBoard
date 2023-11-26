@@ -1,0 +1,16 @@
+{
+    "name": "DF703 TCP Connector",
+    "type": "TCP",
+    "address": "127.0.0.1",
+    "port": 8053,
+    "bufferSize": 1024,
+    "devices": [
+      {
+        "address": "DF703_sensor_address:DF703_sensor_port",
+        "deviceName": "DF703_Sensor",
+        "deviceType": "default",
+        "encoding": "HEX"
+      }
+    ]
+  }
+  
