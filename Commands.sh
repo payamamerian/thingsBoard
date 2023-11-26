@@ -15,3 +15,4 @@ thingsboard_gateway/extensions/socket
 
 docker cp tbGateway8322983184:/thingsboard_gateway/config/socket.json /etc
 
+find / -type f -name "tb_gateway_service.py"
