@@ -1,0 +1,44 @@
+//https://chatuml.com/edit/new#
+@startuml
+
+entity "Site" as Site {
+  + Site ID
+  + Name
+  + Address
+}
+
+entity "Space" as Space {
+  + Space ID
+  + Name
+  + Type
+  + Site ID
+}
+
+entity "EndUser" as EndUser {
+  + User ID
+  + Container Material
+  + Production Type
+}
+
+entity "Equipment" as Equipment {
+  + Equipment ID
+  + Name
+  + Type
+  + Space ID
+  + EndUser ID // Foreign key to EndUser
+}
+
+entity "Point" as Point {
+  + Point ID
+  + Name
+  + Type
+  + Measurement
+  + Equipment ID
+}
+
+Site -- Space : "1" *-- "*"  // Foreign key relationship
+Space -- Equipment : "1" *-- "*"  // Foreign key relationship
+Equipment -- Point : "1" *-- "*"  // Foreign key relationship
+EndUser -- Equipment : "1" *-- "*" // Foreign key relationship
+
+@enduml
