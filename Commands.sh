@@ -17,3 +17,11 @@ thingsboard_gateway/extensions/socket
 docker cp tbGateway8322983184:/thingsboard_gateway/config/socket.json /etc
 
 find / -type f -name "tb_gateway_service.py"
+
+--------------------------PE
+sudo docker run -d -it -p 8053:8053 -v ~/.tb-pe-tcp-udp-integration-logs:/var/log/tb-tcp-udp-integration  \
+-e "RPC_HOST=52.65.144.195" -e "RPC_PORT=9090" \
+-e "INTEGRATION_ROUTING_KEY=99a3ec21-d8ac-9078-f8e8-60059c96c83d"  -e "INTEGRATION_SECRET=kl6jk7z2qno3te3m43xk" \
+--name my-tb-pe-tcp-udp-integration --restart always thingsboard/tb-pe-tcp-udp-integration:3.6.1PE
+
+
