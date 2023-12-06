@@ -1,11 +1,12 @@
 import socket
+from df703 import DF703  # Importing the DF703 class
 
 def create_tcp_server():
     # Create a socket object
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # Bind the socket to a local host and a port
-    host = '185.167.96.79'  
+    host = '185.167.96.79'  # Specific IP address
     port = 8053
     server_socket.bind((host, port))
 
@@ -26,11 +27,9 @@ def create_tcp_server():
                 if not data:
                     break  # No more data, break out of the loop
 
-                # Print received data
-                print('Received:', data.decode())
-
-                # Optionally, you can send a response back to the client
-                # client_socket.send('Message received'.encode())
+                # Decode the received data using DF703 class
+                decoded_data = DF703.parse_data_DF703(data.decode())
+                print('Decoded Data:', decoded_data)
 
         finally:
             # Close the connection
