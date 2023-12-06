@@ -1,35 +1,72 @@
 import json
-from utility import utility  # Assuming utility has the required IEEE754_Hex_To_Float conversion function
+from utility import utility  # Assuming this has the IEEE754_Hex_To_Float conversion function
 
 class DF703:
     @staticmethod
     def parse_data_DF703(req_data):
         try:
-            # Example data parsing based on the protocol specification
-            # Extracting specific fields from the data string
-            # This is a simplistic interpretation and may need adjustments based on actual data format
+            # Extracting packet size and other fields
+            packet_size_hex = req_data[8:10]
+            packet_size = int(packet_size_hex, 16)
+            height = int(req_data[10:14], 16)
+            gps_selection = req_data[14:16]
 
-            # Assuming req_data is a string in the format as specified in the DF703 documentation
-            height_hex = req_data[8:12]
-            temperature_hex = req_data[16:18]
-            longitude_hex = req_data[20:28]  # Only if GPS data is included
-            latitude_hex = req_data[28:36]  # Only if GPS data is included
+            # Process data based on GPS selection
+            if gps_selection == '00':  # No GPS
+                temperature = int(req_data[16:18], 16)
+                alarm_status_hex = req_data[20:24]
+                full_status = int(alarm_status_hex[0], 16)
+                fire_status = int(alarm_status_hex[1], 16)
+                fall_status = int(alarm_status_hex[2], 16)
+                battery_status = int(alarm_status_hex[3], 16)
+                battery_voltage_hex = req_data[24:28]
+                battery_voltage = int(battery_voltage_hex, 16) * 0.01  # Convert to volts
+                rsrp = utility.IEEE754_Hex_To_Float(req_data[28:36])
+                imei = req_data[36:52]
 
-            # Converting hexadecimal values to integers or floats as required
-            height = int(height_hex, 16)  # Height in mm
-            temperature = int(temperature_hex, 16)  # Temperature in Celsius
-            longitude = utility.IEEE754_Hex_To_Float(longitude_hex)  # Convert to float
-            latitude = utility.IEEE754_Hex_To_Float(latitude_hex)  # Convert to float
+                data = {
+                    "packet_size": packet_size,
+                    "height": height,
+                    "temperature": temperature,
+                    "full_status": full_status,
+                    "fire_status": fire_status,
+                    "fall_status": fall_status,
+                    "battery_status": battery_status,
+                    "battery_voltage": battery_voltage,
+                    "rsrp": rsrp,
+                    "imei": imei
+                }
 
-            # Create a JSON object with the parsed data
-            data = {
-                "height": height,
-                "temperature": temperature,
-                "longitude": longitude,
-                "latitude": latitude
-            }
+            else:  # With GPS
+                longitude = utility.IEEE754_Hex_To_Float(req_data[16:24])
+                latitude = utility.IEEE754_Hex_To_Float(req_data[24:32])
+                temperature = int(req_data[32:34], 16)
+                alarm_status_hex = req_data[36:40]
+                full_status = int(alarm_status_hex[0], 16)
+                fire_status = int(alarm_status_hex[1], 16)
+                fall_status = int(alarm_status_hex[2], 16)
+                battery_status = int(alarm_status_hex[3], 16)
+                battery_voltage_hex = req_data[40:44]
+                battery_voltage = int(battery_voltage_hex, 16) * 0.01  # Convert to volts
+                rsrp = utility.IEEE754_Hex_To_Float(req_data[44:52])
+                imei = req_data[52:68]
 
-            return json.dumps(data)  # Return data as JSON string
+                data = {
+                    "packet_size": packet_size,
+                    "height": height,
+                    "longitude": longitude,
+                    "latitude": latitude,
+                    "temperature": temperature,
+                    "full_status": full_status,
+                    "fire_status": fire_status,
+                    "fall_status": fall_status,
+                    "battery_status": battery_status,
+                    "battery_voltage": battery_voltage,
+                    "rsrp": rsrp,
+                    "imei": imei
+                }
+
+            return json.dumps(data)
 
         except Exception as e:
             print(f"Error parsing data: {e}")
