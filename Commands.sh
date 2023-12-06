@@ -25,3 +25,8 @@ sudo docker run -d -it -p 8053:8053 -v ~/.tb-pe-tcp-udp-integration-logs:/var/lo
 --name my-tb-pe-tcp-udp-integration --restart always thingsboard/tb-pe-tcp-udp-integration:3.6.1PE
 
 
+-------------------------- External Server
+sudo ufw allow 8053
+
+
+
