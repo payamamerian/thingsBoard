@@ -1,0 +1,3 @@
+80029999010A81delete: Change the Upload time to 10h 
+800299990Dtelstra.iot;;;81delete: APN Name
+8002999906185.167.96.79;8053;81delete: IP and port 185.167.96.79;8053

@@ -18,6 +18,8 @@ docker cp tbGateway8322983184:/thingsboard_gateway/config/socket.json /etc
 
 find / -type f -name "tb_gateway_service.py"
 
+nohup python3 server.py &
+
 --------------------------PE
 sudo docker run -d -it -p 8053:8053 -v ~/.tb-pe-tcp-udp-integration-logs:/var/log/tb-tcp-udp-integration  \
 -e "RPC_HOST=52.65.144.195" -e "RPC_PORT=9090" \
