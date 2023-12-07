@@ -1,0 +1,20 @@
+{80: packet head;1byte}
+{forced bit; 1byte}
+{device type; 1byte; 01 means DF703}
+{report data type; 1byte}
+{packet size; 1byte; 1E means 30bytes}
+
+{Height 2byte in hex; Unit: mm}
+{GPS 1byte It indicates whether the data contains latitude and longitude information; Content: 0x00 or 0x01; 0x00 mean no GPS information; 0x01 means report GPS information}
+{Long  4byte; in hex, float single type(IEEE-754standard); example Report CD03E942 means 116.507423°}
+{lat  4byte; in hex, float single type(IEEE-754standard);example EF272042 means 40.038998°}
+{TEMP 1byte; in hex, unit:℃; example 0x10 means 16℃}
+{Reserved  1byte}
+{Fall angle  1byte; 1byte, unit:degree; example 0x10 means 16}
+{Full status  0.5byte; Fire status 0.5byte ; Fall status 0.5byte; Power status 0.5byte ; total 2 byte; example 0x0010 means not full, not fire alarm
+fall alarm, and battery normal.}
+{Battery voltage 2byte ; in hex; unit: 10mV; example 0x0E60 means 3680mV, 3.68v}
+{RSRP 4byte Reference Signal Receiving Power; 4byte, in hex; float single type(IEEE-754 standard); example 00C062C4 means RSRP is -907}
+{Frame count 2byte Number of packets reported after power-on; in hex; 000A means the tenth data after power-on
+{DeviceID 8byte; Device ID,1+IMEI; 18613110066348279 means IMEI is 8613110066348279}
+{81:packet tail; 1byte}
