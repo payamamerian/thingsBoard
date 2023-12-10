@@ -1,3 +1,5 @@
+ b'\x80\x00\x01\x02\x1e\x04W\x00\x17\x00\x00\x00\x00\x01e\x00\x00x\xc4\x00\x01\x18e8P`\x06\x81Q\x81'
+
 {80: packet head;1byte}
 {forced bit; 1byte}
 {device type; 1byte; 01 means DF703}
@@ -18,3 +20,81 @@ fall alarm, and battery normal.}
 {Frame count 2byte Number of packets reported after power-on; in hex; 000A means the tenth data after power-on
 {DeviceID 8byte; Device ID,1+IMEI; 18613110066348279 means IMEI is 8613110066348279}
 {81:packet tail; 1byte}
+--------------------------------------
+ b'\x80\x00\x01\x02\x1e\x04W\x00\x17\x00\x00\x00\x00\x01e\x00\x00x\xc4\x00\x01\x18e8P`\x06\x81Q\x81'
+ echo -ne '\x80\x00\x01\x02\x1e\x04W\x00\x17\x00\x00\x00\x00\x01e\x00\x00x\xc4\x00\x01\x18e8P`\x06\x81Q\x81' | nc 185.167.96.79 8053
+ [Packet head:0x80;length:1byte]
+ [Forced bit:0x00;length:1byte]
+ [Device type;1byte, 0x01 DF703]
+ [Report data type;1byte, 0x01 Abnormal reporting type; Report thedatawhenhavestatus changed,
+ suchaschangesfromfulltoemptyorfromfallalarmtonotfallalarm,etc.
+ 0x02 Heart beat data;Report 0x02 type data when restart or at upload interval.
+ 0x03 Confirmation reply for downlink commands;]
+[Thesizeofthepacket;1byte,in hex.For example, report 0x1E means 30 bytes]
+[ Height 2bytes,in hex;Unit:mm; Report 0x060 Emeans 1550mm]
+[ GPS selection It indicates whether the data contains latitude and longitude information;
+ 1bytes; Content:0x00or0x01;
+ 0x00 mean no GPS information;
+ 0x01 means report GPS information.]
+[Long Longitude; 4bytes, in hex, float single type(IEEE-754standard);
+ Report CD03E942
+ means 116.507423°]
+ [ Lat Latitude; 4bytes, in hex, float single type(IEEE-754standard);
+ Report EF272042
+ means40.038998°]
+ [ TEMP Temperature; 1bytes;in hex,unit:℃ Report 0x10 means 16℃]
+ [ Reserved Reserved;1byte;]
+ [ Fall angle The relative angle of inclination of the device; 1byte,in hex,unit:°;
+ Report 0x10 means 16°]
+ [ Full/ Fire/ Fall/ power status Full/Reserved/Fall/power status;Total 2byte;
+ Full status:The upper four bits of the first byte are full status,0x0X:NOT full
+ alarm, 0x1X:full alarm;
+ Fire status:The upper four bits of the first byte are fire status,0xX0:NOT fire
+ alarm,0xX1:fire alarm;
+ Fall status:The upper four bits of the
+ second byte are fall status, 0x0X:NOT
+ fall,0x1X:fall alarm;
+ Power status:The lower four bits of the
+ second byte are power status, 0xX0:
+ battery normal, 0xX1: battery lower
+ alarm.
+ example Report 0x0010 means not full,not fire alarm fall alarm,and
+ battery normal.]
+ [ Battery voltage Battery voltage; 2bytes,in hex;unit:10mV; Report 0x0E60 means
+ 3680mV,3.68V;]
+[RSRP Reference Signal Receiving Power; 4byte, in hex; float single type(IEEE-754 standard);
+ Report 00C062C4 means RSRP is-907]
+ [ Frame count Frame counter, Number of packets reported after power-on; 2bytes;in hex;
+ Report 000 Ameans the tenth data after power-on]
+[DeviceID DeviceID,1+IMEI; 8bytes; Report 18613110066348279 means IMEI is
+ 8613110066348279]  
+
+ Packet Structure:
+1. Packet Head: 0x80 (1 byte)
+2. Forced Bit: 0x00 (1 byte)
+3. Device Type: 0x01 DF703 (1 byte)
+4. Report Data Type (1 byte):
+   - 0x01: Abnormal reporting type (report data when status changes, e.g., full to empty, fall alarm to not fall alarm, etc.)
+   - 0x02: Heartbeat data (report when restarting or at upload interval)
+   - 0x03: Confirmation reply for downlink commands
+5. Packet Size: 1 byte in hexadecimal (e.g., 0x1E means 30 bytes)
+6. Height: 2 bytes in hexadecimal, unit: mm (e.g., 0x060E means 1550 mm)
+7. GPS Selection: 1 byte
+   - 0x00: No GPS information
+   - 0x01: Contains GPS information
+8. Longitude: 4 bytes in hexadecimal, float single type (IEEE-754 standard) (e.g., CD03E942 means 116.507423°)
+9. Latitude: 4 bytes in hexadecimal, float single type (IEEE-754 standard) (e.g., EF272042 means 40.038998°)
+10. Temperature: 1 byte in hexadecimal, unit: °C (e.g., 0x10 means 16°C)
+11. Reserved: 1 byte
+12. Fall Angle: 1 byte in hexadecimal, unit: ° (e.g., 0x10 means 16°)
+13. Status (Total 2 bytes):
+    - Full Status: Upper four bits of the first byte (0x0X: Not full alarm, 0x1X: Full alarm)
+    - Fire Status: Lower four bits of the first byte (0xX0: Not fire alarm, 0xX1: Fire alarm)
+    - Fall Status: Upper four bits of the second byte (0x0X: Not fall, 0x1X: Fall alarm)
+    - Power Status: Lower four bits of the second byte (0xX0: Battery normal, 0xX1: Battery low alarm)
+    (e.g., 0x0010 means not full, not fire alarm, fall alarm, and battery normal)
+14. Battery Voltage: 2 bytes in hexadecimal, unit: 10mV (e.g., 0x0E60 means 3680mV, 3.68V)
+15. RSRP (Reference Signal Receiving Power): 4 bytes in hexadecimal, float single type (IEEE-754 standard) (e.g., 00C062C4 means RSRP is -907)
+16. Frame Count: 2 bytes in hexadecimal (e.g., 000A means the tenth data after power-on)
+17. Device ID: 8 bytes (1+IMEI) (e.g., 18613110066348279 means IMEI is 8613110066348279)
+18. 81:packet tail; 1byte

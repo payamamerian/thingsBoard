@@ -1,79 +1,88 @@
-import json
-from utility import utility  # Assuming this has the IEEE754_Hex_To_Float conversion function
+import struct
 
 class DF703:
     @staticmethod
+    def byte_to_ascii_digits(byte):
+        """Converts a single byte to two ASCII digits."""
+        high_nibble = byte >> 4  # Extracts the high 4 bits
+        low_nibble = byte & 0x0F  # Extracts the low 4 bits
+        return f"{high_nibble}{low_nibble}"
+
+    @staticmethod
     def parse_data_DF703(req_data):
-        # Check if data starts with the packet head '80'
-        if not req_data.startswith("80"):
-            print("Invalid packet header")
-            return json.dumps({})
+        # Convert hex string to bytes if necessary
+        if isinstance(req_data, str):
+            req_data = bytes.fromhex(req_data)
 
-        # Remove the packet head (first 2 characters) and tail (last 2 characters)
-        req_data = req_data[2:-2]
+        # Unpacking the common fields
+        packet_head, forced_bit, device_type, report_data_type, packet_size, height, gps_selection = struct.unpack('>BBBBBHB', req_data[:8])
 
-        try:
-            # Parsing initial fields
-            index = 8  # Skip first 8 characters (4 initial fields)
-            height = int(req_data[index:index+4], 16)
-            index += 4
-            gps_selection = req_data[index:index+2]
-            index += 2
+        parsed_data = {
+            'Packet Head': f"{packet_head:02x}",
+            'Forced Bit': f"{forced_bit:02x}",
+            'Device Type': f"{device_type:02x}",
+            'Report Data Type': f"{report_data_type:02x}",
+            'Packet Size': f"{packet_size:02x}",
+            'Height': height,
+            'GPS Selection': f"{gps_selection:02x}"
+        }
 
-            if gps_selection == '01':  # With GPS
-                longitude = utility.IEEE754_Hex_To_Float(req_data[index:index+8])
-                index += 8
-                latitude = utility.IEEE754_Hex_To_Float(req_data[index:index+8])
-                index += 8
-            else:
-                longitude = latitude = None
+        # Conditional parsing based on GPS Selection
+        offset = 8
+        if gps_selection == 0x01:
+            longitude, latitude = struct.unpack('>ff', req_data[offset:offset+8])
+            offset += 8
+            parsed_data.update({'Longitude': longitude, 'Latitude': latitude})
+        
+        temperature = req_data[offset]
+        parsed_data['Temperature'] = temperature
+        offset += 1
 
-            temperature = int(req_data[index:index+2], 16)
-            index += 2  # Skip Reserved byte
+        # Parsing Reserved, Fall Angle, and Status
+        reserved, fall_angle = struct.unpack('>BB', req_data[offset:offset+2])
+        offset += 2
+        parsed_data['Reserved'] = reserved
+        parsed_data['Fall Angle'] = fall_angle
 
-            fall_angle = int(req_data[index:index+2], 16)
-            index += 2
+        # Status is two bytes
+        status_bytes = req_data[offset:offset + 2]
+        full_status = (status_bytes[0] & 0xF0) >> 4
+        fire_status = status_bytes[0] & 0x0F
+        fall_status = (status_bytes[1] & 0xF0) >> 4
+        power_status = status_bytes[1] & 0x0F
+        parsed_data.update({'Full Status': full_status, 'Fire Status': fire_status, 'Fall Status': fall_status, 'Power Status': power_status})
+        offset += 2
 
-            status_flags = req_data[index:index+4]
-            full_status = int(status_flags[0], 16)
-            fire_status = int(status_flags[1], 16)
-            fall_status = int(status_flags[2], 16)
-            power_status = int(status_flags[3], 16)
-            index += 4
+        # Battery Voltage
+        battery_voltage_hex = ''.join(f"{byte:02x}" for byte in req_data[offset:offset+2])
+        battery_voltage_mV = int(battery_voltage_hex, 16) * 10
+        parsed_data['Battery Voltage'] = battery_voltage_mV
+        offset += 2
 
-            battery_voltage = int(req_data[index:index+4], 16) * 0.01
-            index += 4
-            rsrp = utility.IEEE754_Hex_To_Float(req_data[index:index+8])
-            index += 8
-            frame_count = int(req_data[index:index+4], 16)
-            index += 4
-            device_id_hex = req_data[index:index+16]
-            imei = '1' + device_id_hex
+        # RSRP
+        rsrp_bytes = req_data[offset:offset + 4]
+        rsrp_float = struct.unpack('>f', rsrp_bytes)[0]
+        parsed_data['RSRP'] = rsrp_float
+        offset += 4
 
-            data = {
-                "height": height,
-                "gps_selection": gps_selection,
-                "longitude": longitude,
-                "latitude": latitude,
-                "temperature": temperature,
-                "fall_angle": fall_angle,
-                "full_status": full_status,
-                "fire_status": fire_status,
-                "fall_status": fall_status,
-                "power_status": power_status,
-                "battery_voltage": battery_voltage,
-                "rsrp": rsrp,
-                "frame_count": frame_count,
-                "imei": imei
-            }
+        # Frame Count
+        frame_count_bytes = req_data[offset:offset + 2]
+        frame_count_decimal = int.from_bytes(frame_count_bytes, byteorder='big')
+        parsed_data['Frame Count'] = frame_count_decimal
+        offset += 2
 
-            return json.dumps(data)
+        # Device ID and IMEI
+        device_id_bytes = req_data[offset:offset + 8]
+        imei_bytes = device_id_bytes[1:]
+        imei_str = ''.join(DF703.byte_to_ascii_digits(byte) for byte in imei_bytes)
+        parsed_data['IMEI'] = imei_str
 
-        except Exception as e:
-            print(f"Error parsing data: {e}")
-            return json.dumps({})
+        return parsed_data
 
 # Example usage
 if __name__ == "__main__":
-    sample_data = "800001011E0692001A00000000016E008027C40001186962703655111781"
-    print(DF703.parse_data_DF703(sample_data))
+    data = b'\x80\x00\x01\x02\x1e\x04W\x00\x17\x00\x00\x00\x00\x01e\x00\x00x\xc4\x00\x01\x18e8P`\x06\x81Q\x81'
+    parsed_data = DF703.parse_data(data)
+    print(parsed_data)
+
+
