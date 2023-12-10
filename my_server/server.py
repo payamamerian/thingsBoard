@@ -1,40 +1,42 @@
-# server.py
 import socket
+import subprocess
+import json
 from df703 import DF703  # Importing the DF703 class
 
 def create_tcp_server():
-    # Create a socket object
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-    # Bind the socket to a local host and a port
-    host = '185.167.96.79'  # Specific IP address
+    host = '185.167.96.79'
     port = 8053
     server_socket.bind((host, port))
-
-    # Start listening for connections
     server_socket.listen(5)
     print("Server listening on", host, ":", port)
 
-    # Accepting a new connection
-    client_socket, addr = server_socket.accept()
-    print("Got a connection from", addr)
-
     while True:
-        # Receiving data from the client
-        data = client_socket.recv(1024)
-        if not data:
-            break  # Break the loop if no data is received
-        print("Received data before decode:", data)
+        client_socket, addr = server_socket.accept()
+        print('Got a connection from', addr)
 
-        # Decoding and processing the data
         try:
-            decoded_data = DF703.parse_data_DF703(data)
-            print("Decoded data:", decoded_data)
+            while True:
+                data = client_socket.recv(1024)
+                if not data:
+                    break
+
+                # Assuming DF703.parse_data_DF703 can handle binary data directly
+                decoded_data = DF703.parse_data_DF703(data)
+                
+                # Convert the decoded data to JSON string if it's a dictionary
+                if isinstance(decoded_data, dict):
+                    json_data = json.dumps(decoded_data)
+                else:
+                    json_data = str(decoded_data)
+
+                curl_command = f"curl -v -X POST http://185.167.96.79:8080/api/v1/l9ollIobraqrDkjy4cEL/telemetry --header 'Content-Type:application/json' --data '{json_data}'"
+                subprocess.run(curl_command, shell=True, check=True)
+
         except Exception as e:
-            print("Error processing data:", e)
+            print(f"An error occurred: {e}")
+        finally:
+            client_socket.close()
 
-    # Closing the client connection
-    client_socket.close()
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     create_tcp_server()
