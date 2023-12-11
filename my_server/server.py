@@ -2,6 +2,8 @@ import socket
 import subprocess
 import json
 from df703 import DF703  # Importing the DF703 class
+from daemon import DaemonContext
+from sys import stdout, stderr
 
 def create_tcp_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -12,10 +14,10 @@ def create_tcp_server():
     print("Server listening on", host, ":", port)
 
     while True:
-        client_socket, addr = server_socket.accept()
-        print('Got a connection from', addr)
-
         try:
+            client_socket, addr = server_socket.accept()
+            print('Got a connection from', addr)
+
             while True:
                 data = client_socket.recv(1024)
                 if not data:
@@ -39,5 +41,5 @@ def create_tcp_server():
             client_socket.close()
 
 if __name__ == '__main__':
-    create_tcp_server()
-    
+    with DaemonContext(stdout=stdout, stderr=stderr):
+        create_tcp_server()
