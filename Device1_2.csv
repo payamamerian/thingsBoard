@@ -1,0 +1,11 @@
+name,type,Battery Voltage,Device Type,Fall Angle,Fall Status,Fire Status,Forced Bit,Frame Count,Full Status,GPS Selection,Height,RSRP,Temperature,IMEI,Packet Head,Packet Size,Power Status,Report Data Type,Reserved
+Sensor1,default,3660,1,0,0,0,0,3,0,0,600,1.76704E-38,21,65385060068301,80,1e,0,2,0
+Sensor2,default,3660,1,0,0,0,0,3,0,0,580,1.76704E-38,24,65385060068302,80,1e,0,2,0
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
