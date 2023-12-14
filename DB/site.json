@@ -1,0 +1,14 @@
+{
+    "id": "site-123",
+    "dis": "Queensland Corn Farm",
+    "site": true,
+    "area": "500 acres",
+    "geoAddr": "123 Farm Road, Queensland, Australia",
+    "geoCoord": "C(-20.917574, 142.702789)",
+    "geoCity": "Queensland",
+    "geoCountry": "AU",
+    "geoState": "Queensland",
+    "primaryFunction": "agriculture",
+     "soilType": "sandy loam"
+  }
+  
