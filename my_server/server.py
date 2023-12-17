@@ -1,6 +1,7 @@
 import socket  # Add this line
 import subprocess
 import json
+import time
 from df703 import DF703  # Importing the DF703 class
 from daemon import DaemonContext
 from sys import stdout, stderr
@@ -31,8 +32,10 @@ def create_tcp_server():
                     
         except Exception as e:
             print(f"An error occurred: {e}")
+        finally:
             if server_socket:  # Check if server_socket is not None before closing
                 server_socket.close()  # Close the server socket before restarting
+            time.sleep(1)
 
 if __name__ == '__main__':
     with DaemonContext(stdout=stdout, stderr=stderr):
