@@ -1,13 +1,11 @@
 import logging
-
-# Set up logging
-logging.basicConfig(filename='server.log', level=logging.DEBUG)
-
 import socket
 import time
 from df703 import DF703
-from daemon import DaemonContext
-from sys import stdout, stderr
+
+# Set up logging to capture both standard output and errors
+logging.basicConfig(filename='server.log', level=logging.DEBUG, 
+                    format='%(asctime)s %(levelname)s:%(message)s')
 
 def create_tcp_server():
     server_socket = None
@@ -36,12 +34,12 @@ def create_tcp_server():
                     logging.debug('Decoded data: %s', decoded_data)
 
         except Exception as e:
-            logging.error("An error occurred: %s", e)
+            logging.error("An error occurred: %s", str(e))
         finally:
             if server_socket:
                 server_socket.close()
             time.sleep(1)
 
 if __name__ == '__main__':
-    with DaemonContext(stdout=stdout, stderr=stderr):
-        create_tcp_server()
+    create_tcp_server()
+# Run Command: nohup python3 server.py >> output.log 2>&1 &
