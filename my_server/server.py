@@ -1,14 +1,13 @@
 import logging
+
+# Set up logging
+logging.basicConfig(filename='server.log', level=logging.DEBUG)
+
 import socket
-import subprocess
-import json
 import time
 from df703 import DF703
 from daemon import DaemonContext
 from sys import stdout, stderr
-
-# Set up logging
-logging.basicConfig(filename='server.log', level=logging.DEBUG)
 
 def create_tcp_server():
     server_socket = None
