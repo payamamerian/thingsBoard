@@ -98,3 +98,6 @@ fall alarm, and battery normal.}
 16. Frame Count: 2 bytes in hexadecimal (e.g., 000A means the tenth data after power-on)
 17. Device ID: 8 bytes (1+IMEI) (e.g., 18613110066348279 means IMEI is 8613110066348279)
 18. 81:packet tail; 1byte
+
+ echo -ne '\x80\x00\x01\x02\x1e\x04W\x00\x17\x00\x00\x00\x00\x01e\x00\x00x\xc4\x00\x01\x18e8P`\x06\x81Q\x81' | nc 185.167.96.79 8053
+ 
