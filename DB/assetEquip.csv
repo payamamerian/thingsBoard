@@ -1,9 +1,2 @@
-name,type,dis,equip,
-equipDemo,default,CorpBin,TRUE,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
+name,type,dis,equip
+equipDemo,default,CorpBin,TRUE
