@@ -1,0 +1,22 @@
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+req_extensions = req_ext
+distinguished_name = dn
+
+[dn]
+C=US
+ST=somewhere
+L=someplace
+O=haproxy
+OU=haproxy
+CN=haproxy.selfsigned.invalid
+
+[req_ext]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = aria.ns.cloudflare.com
+DNS.2 = ray.ns.cloudflare.com
+IP.1 = 81.28.6.227

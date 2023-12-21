@@ -1,0 +1,7 @@
+openssl req -new -nodes -out /tmp/haproxy.csr -keyout /tmp/haproxy_key.pem -config san_config.cnf
+
+openssl x509 -req -days 3650 -in /tmp/haproxy.csr -signkey /tmp/haproxy_key.pem -out /tmp/haproxy_cert.pem -extensions req_ext -extfile san_config.cnf
+
+openssl x509 -in /tmp/haproxy_cert.pem -text -noout
+
+cat /tmp/haproxy_cert.pem /tmp/haproxy_key.pem > /usr/share/tb-haproxy/default.pem
