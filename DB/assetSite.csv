@@ -1,0 +1,2 @@
+name,type,dis,site,area,geoAddr,geoCoord.lat,geoCoord.lng,geoCity,geoCountry,primaryFunction,soilType
+siteDemo,default,Queensland Corn Farm,TRUE,500 acres,"123 Farm Road, Queensland, Australia",-20.917574,142.702789,Queensland,AU,cornFarm,sandy loam
