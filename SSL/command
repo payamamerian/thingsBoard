@@ -5,3 +5,9 @@ openssl x509 -req -days 3650 -in /tmp/haproxy.csr -signkey /tmp/haproxy_key.pem 
 openssl x509 -in /tmp/haproxy_cert.pem -text -noout
 
 cat /tmp/haproxy_cert.pem /tmp/haproxy_key.pem > /usr/share/tb-haproxy/default.pem
+
+------------
+sudo apt-get update
+sudo apt-get install certbot
+
+sudo certbot certonly --standalone -d mybin.online
