@@ -40,3 +40,7 @@ sudo haproxy -c -f /etc/haproxy/haproxy.cfg
 sudo systemctl status haproxy
 sudo service haproxy status
 
+#Reissue the certificate
+sudo certbot certonly --standalone -d mybin.online
+
+
