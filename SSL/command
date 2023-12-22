@@ -11,3 +11,24 @@ sudo apt-get update
 sudo apt-get install certbot
 
 sudo certbot certonly --standalone -d mybin.online
+
+-------------------------------
+cd /etc/letsencrypt/live/mybin.online/
+fullchain.pem: This is your certificate along with any intermediate certificates.
+privkey.pem: This is your private key.
+
+sudo mkdir -p /etc/haproxy/ssl/
+
+cat /etc/letsencrypt/live/mybin.online/fullchain.pem /etc/letsencrypt/live/mybin.online/privkey.pem > /etc/haproxy/ssl/mybin.online.pem
+
+sudo nano /etc/haproxy/haproxy.cfg
+
+frontend https-in
+    bind *:443 ssl crt /etc/haproxy/ssl/mybin.online.pem
+    mode http
+    # ... rest of your configuration ...
+
+#Check Configuration root@prodserver03:/etc/letsencrypt/live/mybin.online#
+
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+
