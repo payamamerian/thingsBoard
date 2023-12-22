@@ -43,4 +43,18 @@ sudo service haproxy status
 #Reissue the certificate
 sudo certbot certonly --standalone -d mybin.online
 
+************************************
+curl -v https://mybin.online/
+ systemctl status  haproxy
+ systemctl restart  haproxy
+vi haproxy/haproxy.cfg
+curl http://127.0.0.1:8080 -v
+ curl http://127.0.0.1:8080
+ss -talnp
+ ip addr
+vi haproxy/haproxy.cfg
+/opt/installer/tweaks/extras/haproxy/haproxy.cfg
+/opt/installer/tweaks/extras/haproxy/haproxy-vdi-broker/haproxy.cfg
+/etc/haproxy/haproxy.cfg
+
 
