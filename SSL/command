@@ -23,12 +23,20 @@ cat /etc/letsencrypt/live/mybin.online/fullchain.pem /etc/letsencrypt/live/mybin
 
 sudo nano /etc/haproxy/haproxy.cfg
 
+#Reboot and applyconigurartion sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+
+
 frontend https-in
     bind *:443 ssl crt /etc/haproxy/ssl/mybin.online.pem
     mode http
     # ... rest of your configuration ...
 
 #Check Configuration root@prodserver03:/etc/letsencrypt/live/mybin.online#
+sudo systemctl restart haproxy
+sudo service haproxy restart
 
 sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+
+sudo systemctl status haproxy
+sudo service haproxy status
 
