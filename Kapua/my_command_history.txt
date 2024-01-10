@@ -1,0 +1,342 @@
+    1  lsb_release 
+    2  lsb_release  -a
+    3  apt update
+    4  apt list --upgradable
+    5  apt upgrade
+    6  apt dist-upgrade
+    7  git clone https://github.com/eclipse/kapua.git
+    8  ls
+    9  apt install screen
+   10  screen
+   11  export
+   12  export TERM=xterm
+   13  screen
+   14  screen -d
+   15  screen -r
+   16  export TERM=xterm
+   17  screen -r
+   18  export
+   19  export TERM=xterm
+   20  screen -d
+   21  screen -r
+   22  export TERM=xterm
+   23  screen -d
+   24  screen -r
+   25  export TERM=xterm
+   26  screen -d
+   27  screen -r
+   28  screen -d
+   29  export TERM=xterm
+   30  screen -r
+   31  export TERM=xterm
+   32  screen -d
+   33  screen -r
+   34  $ sudo apt install gnupg ca-certificates curl
+   35  $ curl -s https://repos.azul.com/azul-repo.key | sudo gpg --dearmor -o /usr/share/keyrings/azul.gpg
+   36  apt install gnupg ca-certificates curl
+   37  curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg
+   38  echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | sudo tee /etc/apt/sources.list.d/zulu.list
+   39  $ sudo apt update
+   40  apt update
+   41  apt install zulu11-jdk
+   42  mvn clean install -Pdocker,console -DskipTests
+   43  lxc
+   44  lxc ls
+   45  lxc exec kapua 
+   46  lxc exec kapua  bash
+   47  apt remove zulu11-jdk
+   48  export TERM=xterm
+   49  screen -d
+   50  screen -r
+   51  export TERM=xterm
+   52  screen -d
+   53  screen -r
+   54  export TERM=xterm
+   55  screen -d
+   56  screen -r
+   57  export TERM=xterm
+   58  screen -d
+   59  screen -r
+   60  export TERM=xterm
+   61  screen -d
+   62  screen -r
+   63  apt install lxd
+   64  snap
+   65  apt install snap
+   66  snap install lxd
+   67  apt install snap
+   68  snap 
+   69  apt install snapd
+   70  systemctl start snapd
+   71  systemctl enable snapd
+   72  snap install lxd
+   73  ip addr
+   74  ls
+   75  lxd init
+   76  lxd st
+   77  lxc
+   78  lxc st
+   79  lxc stor
+   80  lxc storage
+   81  lxc storage liist
+   82  lxc storage list
+   83  ls /var/lib
+   84  ls /var/lib/docker
+   85  mkdir /var/lib/docker
+   86  lxc storage create docker btrfs
+   87  lxc storage list
+   88  ls /var/snap/lxd/common/lxd/disks/docker.img
+   89  ls /var/snap/lxd/common/lxd/disks/docker.img -l
+   90  ls /var/snap/lxd/common/lxd/disks/docker.img -lh
+   91  lxc image
+   92  lxc image list images:
+   93  lxc image list images: | grep debian
+   94  lxc launch debian/12 kapua
+   95  lxc launch images:debian/12 kapua
+   96  lxc network list
+   97  lxc exec kapua bash
+   98  lxc restart kapua
+   99  lxc ls
+  100  lxc exec kapua
+  101  lxc exec kapua bash
+  102  lxc restart kapua
+  103  lxc ls
+  104  lxc network list
+  105  lxc exec kapua bash
+  106  lxc restart kapua
+  107  lxc ls
+  108  lxc exec kapua bash
+  109  lxc restart kapua
+  110  lxc exec kapua bash
+  111  lxc restart kapua
+  112  lxc exec kapua bash
+  113  lxc config kapua security.nesting=true security.syscalls.intercept.mknod=true security.syscalls.intercept.setxattr=true
+  114  lxc config set  kapua security.nesting=true security.syscalls.intercept.mknod=true security.syscalls.intercept.setxattr=true
+  115  lxc exec kapua bash
+  116  /bin/sh -c useradd -u 1000 -g 0 -d '/var/opt/jetty' -s '/sbin/nologin' jetty &&     mkdir -p /opt/jetty /var/opt/jetty/lib/ext /var/opt/jetty/start.d /var/opt/jetty/tls &&     curl -Ls https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.4.12.v20180830/jetty-distribution-9.4.12.v20180830.tar.gz -o /tmp/jetty.tar.gz &&     tar --strip=1 -xzf /tmp/jetty.tar.gz -C /opt/jetty &&     rm -f /tmp/jetty.tar.gz &&     cd /var/opt/jetty &&     java -jar /opt/jetty/start.jar --approve-all-licenses --create-startd --add-to-start=http,https,jsp,jstl,websocket,deploy,logging-logback,jmx,ssl,stats &&     chown -R 1000:0 /opt/jetty /var/opt/jetty &&     chmod -R g=u /opt/jetty /var/opt/jetty
+  117  lxc exec kapua bash
+  118  exit
+  119  export TERM=xterm
+  120  screen -d
+  121  screen -r
+  122  lxc exec kapua  bash
+  123  ls
+  124  lxc exec kapua  bash
+  125  exit
+  126  lxc exec kapua  bash
+  127  ls
+  128  rm kapua/
+  129  rm kapua/ -rf
+  130  screen
+  131  export TERM=xterm
+  132  screen 
+  133  lxc exec kapua  bash
+  134  export TERM=xterm
+  135  screen -d
+  136  screen -r
+  137  export TERM=xterm
+  138  screen -d
+  139  screen -r
+  140  cd com
+  141  cd snaps/
+  142  ks
+  143  ls
+  144  cd ../libs
+  145  cd ../lib
+  146  ls
+  147  cd ../../
+  148  lxc storage 
+  149  lxc storage  list
+  150  cd /var/snap/lxd/common/
+  151  cd lxd
+  152  cd containers/
+  153  ls
+  154  cd kapua
+  155  lsd
+  156  ls
+  157  cd rootfs/
+  158  cd /var/lib/docker
+  159  ls
+  160  cd ../tem
+  161  cd /var/snap/lxd/common/lxd/containers/kapua/var/lib/docker
+  162  cd /var/snap/lxd/common/lxd/containers/kapua/var/lib/
+  163  cd /var/snap/lxd/common/lxd/containers/kapua/rootfs/var/lib/docker
+  164  ls
+  165  cd containers/
+  166  ls
+  167  cd ../image/
+  168  ls
+  169  cd vfs/
+  170  ls
+  171  cd imagedb/
+  172  ls
+  173  exit
+  174  lxc exec kapua  bash
+  175  lxc ls
+  176  lxc storage volume create docker  kapua
+  177  lxc stoage
+  178  lxc storage
+  179  lxc storage list
+  180  ls -l /var/snap/lxd/common/lxd/disks/docker.img
+  181  ls -l /var/snap/lxd/common/lxd/disks/docker.img -h
+  182  df -h
+  183  lxc storage 
+  184  lxc storage delete docker
+  185  lxc storage delete docker -f
+  186  lxc storage volume delete docker kapua
+  187  lxc storage delete docker 
+  188  lxc storage create docker btrfs -h
+  189  lxc storage create docker btrfs size=5GiB
+  190  ls -l /var/snap/lxd/common/lxd/disks/docker.img
+  191  ls -l /var/snap/lxd/common/lxd/disks/docker.img -h
+  192  lxc storage volume create docker  kapua
+  193  lxc config device add kapua docker disk pool=docker source=kapua path=/var/lib/docker
+  194  lxc restart kapua
+  195  lxc exec kapua bash
+  196  exit
+  197  lxc exec kapua bash
+  198  lxc config set kapua security.privileged=true
+  199  lxc restart kapua
+  200  lxc exec kapua bash
+  201  lxc config set kapua security.privileged=false
+  202  lxc restart kapua
+  203  lxc exec kapua bash
+  204  lxc config
+  205  lxc config show kapua
+  206  exit
+  207  lxc ls
+  208  export TERM=xterm
+  209  screen -d
+  210  screen -r
+  211  screen
+  212  export TERM=xterm
+  213  screen -d
+  214  screen -r
+  215  export TERM=xterm
+  216  screen -d
+  217  screen -r
+  218  lxc exec kapua bash
+  219  lxc config set kapua security.syscalls.intercept.mknod=true
+  220  lxc config set kapua security.syscalls.intercept.mknod=false
+  221  lxc config set kapua security.syscalls.intercept.setxattr=false
+  222  lxc restart kapua
+  223  lxc exec kapua bash
+  224  docker
+  225  apt install docker.io
+  226  docker run it rockylinux:8 
+  227  docker run -it rockylinux:8
+  228  lxc config set kapuasecurity.privileged: true
+  229  lxc config set kapua security.privileged: true
+  230  lxc config set kapua security.privileged=true
+  231  lxc restart kapua
+  232  lxc exec kapua bash
+  233  lxc ls
+  234  lxc config show kapua
+  235  lxc stop kapua
+  236  lxc start kapua
+  237  lxc exec kapua bash
+  238  lxc stop kapua
+  239  ls
+  240  lxc ls
+  241  docker ps -a
+  242  dockerrm 12
+  243  docker rm 12
+  244  git clone https://github.com/eclipse/kapua
+  245  cd kapua/
+  246  apt install maven
+  247  mvn clean install -Pdocker,console -DskipTests
+  248  java -version
+  249  apt remove 
+  250  apt remove  zulu22-jfk
+  251  apt remove  zulu22-jdk
+  252  apt remove  zulu11-jdk
+  253  apt autoremove
+  254  apt install  zulu8-jdk
+  255  jaa -version
+  256  java -version
+  257  update-java-alternatives 
+  258  update-java-alternatives  -a
+  259  update-java-alternatives 
+  260  java --version
+  261  rm /usr/bin/java
+  262  update-java-alternatives -ll
+  263  ./deployment/docker/unix/docker-deploy.sh 
+  264  docker ps
+  265  iptables
+  266  iptables -L
+  267  curl http://127.0.0.1:8080
+  268  curl http://127.0.0.1:8080 -v -I
+  269  ip addr
+  270  docker ps
+  271  ss -talnp
+  272  curl http://127.0.0.1:8080 -v -I
+  273  exit
+  274  docker ps
+  275  docker image ls
+  276  export TERM=xterm
+  277  screen -d
+  278  screen -r
+  279  exit
+  280  cd ka;pu
+  281  cd kapua/
+  282  ls
+  283  update-java-alternatives -l
+  284  update-java-alternatives -s zulu8-ca-amd64
+  285  update-java-alternatives -s zulu8-ca
+  286  java --version
+  287  java -version
+  288  mvn clean install -Pdocker,console -DskipTests
+  289  git branch
+  290  git checkout 1.9.10
+  291  git checkout 1.6.10
+  292  mvn clean install -Pdocker,console -DskipTests
+  293  rm -rf ~/.m2/
+  294  mvn clean install -Pdocker,console -DskipTests
+  295  java -version
+  296  apt install docker-compose
+  297  apt install docker-compose 
+  298  df -h
+  299  ls
+  300  lxc ls
+  301  lxc delete kapua
+  302  df -h
+  303  apt install docker-compose
+  304  du -d1 -h ./
+  305  mvn clean install -Pdocker,console -DskipTests
+  306  cd kapua/
+  307  docker-compose ps
+  308  ls
+  309  ./deployment/docker/unix/docker-logs.sh 
+  310  docker-compose ps
+  311  docker ps
+  312  cd srmai
+  313  ls
+  314  find -type f -name "h2"
+  315  find -type f -name "*h2*"
+  316  cd assembly/sql/entrypoint/
+  317  ls
+  318  vi run-h2 
+  319  exit
+  320  export TERM=xterm
+  321  screen -d
+  322  screen -
+  323  lds
+  324  lks
+  325  ls
+  326  exit
+  327  sudo ufw allow 880
+  328  sudo ufw allow 8080
+  329  sudo ufw allow 80820
+  330  sudo ufw allow 8080
+  331  md backup
+  332  mkdir backup
+  333  cd backup/
+  334  pwd
+  335  cd backup/
+  336  tar -cvpzf backupfile1.tar.gz --exclude=/root/backup/backupfile1.tar.gz --one-file-system /
+  337  clear
+  338  history 100
+  339  history | tail -n 400 > ~/backup/my_command_history.txt
+  340  ls
+  341  rm backupfile1.tar.gz 
+  342  history | tail -n 400 > ~/backup/my_command_history.txt
