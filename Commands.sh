@@ -30,5 +30,7 @@ sudo docker run -d -it -p 8053:8053 -v ~/.tb-pe-tcp-udp-integration-logs:/var/lo
 -------------------------- External Server
 sudo ufw allow 8053
 
+------------------------ access Docker environment 
+ docker exec -u root -it fef3a34abf7f /bin/sh
 
 
