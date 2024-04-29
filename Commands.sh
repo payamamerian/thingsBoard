@@ -30,5 +30,8 @@ sudo docker run -d -it -p 8053:8053 -v ~/.tb-pe-tcp-udp-integration-logs:/var/lo
 -------------------------- External Server
 sudo ufw allow 8053
 
+----------------------- ng serve
+set NODE_OPTIONS=--max-old-space-size=8048 && ng serve
+
 
 
