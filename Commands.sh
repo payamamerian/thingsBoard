@@ -33,5 +33,7 @@ sudo ufw allow 8053
 ----------------------- ng serve
 set NODE_OPTIONS=--max-old-space-size=8048 && ng serve
 
+------------------------ access Docker environment 
+ docker exec -u root -it fef3a34abf7f /bin/sh
 
 
